@@ -27,7 +27,10 @@ sudo apt update
 sudo apt install -y gh
 
 # • Initiate GitHub CLI authentication (this is interactive).
-gh auth login
+# Check if already authenticated; if not, run authentication.
+if ! gh auth status >/dev/null 2>&1; then
+  gh auth login
+fi
 
 # nvim (Neovim)
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
