@@ -50,5 +50,8 @@ fi
 
 # atuin
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh || echo "Failed to install atuin"
-source ~/.bashrc || echo "Failed to source ~/.bashrc"
+# Ensure Atuin binary is available in PATH (typically installed to $HOME/.local/bin)
+if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
 atuin login -u ajit283 || echo "Failed to log in to atuin"
