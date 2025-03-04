@@ -59,3 +59,9 @@ if [ ! -d "$HOME/.config/dotfiles" ]; then
 else
   echo "Dotfiles already exist in ~/.config/dotfiles."
 fi
+
+# atuin
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+source ~/.bashrc
+atuin login -u ajit283
+
