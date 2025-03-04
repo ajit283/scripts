@@ -36,3 +36,7 @@ cargo install --locked zellij
 
 # C-x C-e
 echo 'export $EDITOR=nvim' >> ~/.bashrc
+
+
+# dotfiles
+git clone https://github.com/ajit283/dotfiles.git ~/.config/dotfiles
