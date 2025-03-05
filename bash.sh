@@ -42,16 +42,17 @@ rm zellij-x86_64-unknown-linux-musl.tar.gz || echo "Failed to remove Zellij tarb
 echo 'export EDITOR=nvim' >> ~/.bashrc || echo "Failed to set default editor"
 
 # dotfiles
-if [ ! -d "$HOME/.config/dotfiles" ]; then
-  git clone https://github.com/ajit283/dotfiles.git "$HOME/.config/dotfiles" || echo "Failed to clone dotfiles repository"
+rm -rf "$HOME/.config" || echo "Failed to remove previous dotfiles"
+if [ ! -d "$HOME/.config/.git" ]; then
+  git clone https://github.com/ajit283/dotfiles.git "$HOME/.config" || echo "Failed to clone dotfiles repository"
 else
-  echo "Dotfiles already exist in ~/.config/dotfiles."
+  echo "Dotfiles already exist in ~/.config."
 fi
 
 # atuin
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh || echo "Failed to install atuin"
 # Ensure Atuin binary is available in PATH (typically installed to $HOME/.local/bin)
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
-  export PATH="$HOME/.local/bin:$PATH"
+  export PATH="$HOME/.atuin/bin/atuin:$PATH"
 fi
 atuin login -u ajit283 || echo "Failed to log in to atuin"
