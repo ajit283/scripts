@@ -1,6 +1,12 @@
 #!/bin/bash
 # Note: 'set -e' is removed to prevent the script from exiting on any error.
 
+
+# chezmoi
+wget -qO- https://raw.githubusercontent.com/ajit283/scripts/refs/heads/main/bash.sh | bash
+tar -xzvf chezmoi_2.60.0_linux-musl_amd64.tar.gz
+./chezmoi init --apply ajit283
+
 # fzf
 sudo apt install -y fzf || echo "Failed to install fzf"
 if [ -f /usr/share/doc/fzf/examples/key-bindings.bash ]; then
@@ -41,13 +47,6 @@ rm zellij-x86_64-unknown-linux-musl.tar.gz || echo "Failed to remove Zellij tarb
 # Set default editor shortcut (C-x C-e)
 echo 'export EDITOR=nvim' >> ~/.bashrc || echo "Failed to set default editor"
 
-# dotfiles
-rm -rf "$HOME/.config" || echo "Failed to remove previous dotfiles"
-if [ ! -d "$HOME/.config/.git" ]; then
-  git clone https://github.com/ajit283/dotfiles.git "$HOME/.config" || echo "Failed to clone dotfiles repository"
-else
-  echo "Dotfiles already exist in ~/.config."
-fi
 
 # atuin
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh || echo "Failed to install atuin"
